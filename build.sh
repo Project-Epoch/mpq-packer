@@ -4,7 +4,7 @@ echo -e "Building mpq-packer..."
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     build="linux-x64"
-elif [[ "$OSTYPE" == "cygwin" ]]; then
+elif [[ "$OSTYPE" == "msys" ]]; then
     build="win-x64"
 fi
 
