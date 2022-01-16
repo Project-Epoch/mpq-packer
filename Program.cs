@@ -53,7 +53,8 @@ namespace mpq_packer
             string folder = args[0];
             string mpqPath = args[1];
 
-            if (! Directory.Exists(folder)) {
+            if (!Directory.Exists(folder))
+            {
                 Logger.Danger("Could not find specified folder '" + folder + "'. Please ensure this exists!");
 
                 System.Environment.Exit(0);
@@ -72,10 +73,10 @@ namespace mpq_packer
 
             ProgressBar progress = new ProgressBar(60);
 
-            int current = 1;
-
             using (MpqArchive mpq = MpqArchive.CreateNew(mpqPath, MpqArchiveVersion.Version2, MpqFileStreamAttributes.None, MpqFileStreamAttributes.CreateAttributesFile, files.Length))
             {
+                int current = 1;
+
                 foreach (string file in files)
                 {
                     string innerPath = After(file, folder);
@@ -83,9 +84,9 @@ namespace mpq_packer
 
                     mpq.AddFileFromDiskWithCompression(file, innerPath, MpqCompressionTypeFlags.MPQ_COMPRESSION_ZLIB);
 
-                    int percentage = (current / total) * 100;
+                    int percentComplete = (int)Math.Round((double)(100 * current) / total);
 
-                    progress.Update(percentage);
+                    progress.Update(percentComplete);
 
                     current++;
                 }
